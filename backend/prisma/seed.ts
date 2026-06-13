@@ -11,7 +11,7 @@ async function main() {
     data: {
       name: "Amazon $100 Coupon",
       description: "Amazon gift card worth $100.",
-      imageUrl: "https://picsum.photos/seed/amazon/400/300",
+      imageUrl: "https://placehold.co/400x300/png?text=Amazon+Coupon",
       type: ProductType.COUPON,
       coupon: {
         create: {
@@ -28,7 +28,7 @@ async function main() {
     data: {
       name: "Steam $50 Coupon",
       description: "Steam wallet code worth $50.",
-      imageUrl: "https://picsum.photos/seed/steam/400/300",
+      imageUrl: "https://placehold.co/400x300/png?text=Steam+Coupon",
       type: ProductType.COUPON,
       coupon: {
         create: {
