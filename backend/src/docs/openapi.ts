@@ -17,8 +17,6 @@ export const openapiSpec = {
   info: {
     title: "Coupon Marketplace API",
     version: "1.0.0",
-    description:
-      "Digital coupon marketplace — reseller, storefront (customer), and admin APIs.",
   },
   servers: [{ url: "http://localhost:4000" }],
   tags: [
