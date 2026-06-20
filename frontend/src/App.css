@@ -68,3 +68,74 @@
   padding: 10px;
   border-radius: 8px;
 }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.tabs button {
+  padding: 6px 14px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.tabs button.active {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+.admin-auth {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.admin-auth input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+.admin-auth button,
+.form button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+.form input,
+.form select {
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+.form button {
+  grid-column: 1 / -1;
+}
+.meta {
+  font-size: 0.8rem;
+  color: #555;
+}
+.sold {
+  color: #991b1b;
+  font-weight: 700;
+}
+.available {
+  color: #065f46;
+  font-weight: 700;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
