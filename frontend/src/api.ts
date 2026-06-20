@@ -7,6 +7,14 @@ import type {
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:4000";
 
+function bearer(token: string): Record<string, string> {
+  const clean = [...token]
+    .filter((ch) => ch.charCodeAt(0) <= 255)
+    .join("")
+    .trim();
+  return { Authorization: `Bearer ${clean}` };
+}
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, {
     ...options,
@@ -18,20 +26,20 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 }
 
 export const api = {
+  // Customer (public)
   listCoupons: () => request<PublicProduct[]>("/api/storefront/products"),
   buyAsCustomer: (id: string) =>
     request<PurchaseResult>(`/api/storefront/products/${id}/purchase`, {
       method: "POST",
     }),
 
+  // Admin
   listAdmin: (token: string) =>
-    request<AdminCoupon[]>("/api/admin/products", {
-      headers: { Authorization: `Bearer ${token}` },
-    }),
+    request<AdminCoupon[]>("/api/admin/products", { headers: bearer(token) }),
   createCoupon: (token: string, body: CreateCouponBody) =>
     request<AdminCoupon>("/api/admin/products", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: bearer(token),
       body: JSON.stringify(body),
     }),
 };
