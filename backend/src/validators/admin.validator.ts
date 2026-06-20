@@ -1,15 +1,18 @@
 import { z } from "zod";
 
-// Convert API fields to camelCase
 export const createCouponSchema = z
   .object({
-    name: z.string().min(1),
-    description: z.string().min(1),
-    image_url: z.string().min(1),
-    cost_price: z.coerce.number().nonnegative(),
-    margin_percentage: z.coerce.number().nonnegative(),
+    name: z.string().min(1, "Name is required."),
+    description: z.string().min(1, "Description is required."),
+    image_url: z.string().min(1, "Image URL is required."),
+    cost_price: z.coerce
+      .number()
+      .nonnegative("Cost price must be a number of zero or more."),
+    margin_percentage: z.coerce
+      .number()
+      .nonnegative("Margin percentage must be a number of zero or more."),
     value_type: z.enum(["STRING", "IMAGE"]),
-    value: z.string().min(1),
+    value: z.string().min(1, "Coupon value is required."),
   })
   .transform((d) => ({
     name: d.name,
@@ -21,16 +24,21 @@ export const createCouponSchema = z
     value: d.value,
   }));
 
-// Update
 export const updateCouponSchema = z
   .object({
-    name: z.string().min(1).optional(),
-    description: z.string().min(1).optional(),
-    image_url: z.string().min(1).optional(),
-    cost_price: z.coerce.number().nonnegative().optional(),
-    margin_percentage: z.coerce.number().nonnegative().optional(),
+    name: z.string().min(1, "Name cannot be empty.").optional(),
+    description: z.string().min(1, "Description cannot be empty.").optional(),
+    image_url: z.string().min(1, "Image URL cannot be empty.").optional(),
+    cost_price: z.coerce
+      .number()
+      .nonnegative("Cost price must be a number of zero or more.")
+      .optional(),
+    margin_percentage: z.coerce
+      .number()
+      .nonnegative("Margin percentage must be a number of zero or more.")
+      .optional(),
     value_type: z.enum(["STRING", "IMAGE"]).optional(),
-    value: z.string().min(1).optional(),
+    value: z.string().min(1, "Coupon value cannot be empty.").optional(),
   })
   .transform((d) => ({
     name: d.name,
